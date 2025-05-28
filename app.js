@@ -17,8 +17,10 @@ app.get('/',  (req, res) => {
     res.send('Bienvenida/o a mi sitio web');
 });
 
+//Request (Petición)
+//Response (Respuesta)
 app.get('/test',  (req, res) => {
-    res.send('Ésta es una página de test 2');
+    res.send('Ésta es una página de test 4');
 });
 
 app.get('/saludar/:nombre', (req, res) => {
@@ -26,20 +28,7 @@ app.get('/saludar/:nombre', (req, res) => {
     res.send(`Hola, ${nombre}`);
 });
 
-app.get('/eventos', async (req, res) => {
-
-    const query = `
-        SELECT id, nombre, descripcion, cupo
-        FROM eventos
-    `;
-    try{
-        [results] = await connection.query(query);
-        res.json({ success: true, results });
-    }catch(error){
-        console.log(error);
-        res.status(500).json({ success: false, message: 'Error al intentar recuperar los eventos' });
-    }
-});
+app.use(require('./src/routes/eventoRoutes'));
 
 app.use((req, res, next) => {
     res.status(404);
