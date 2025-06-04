@@ -19,8 +19,16 @@ app.get('/',  (req, res) => {
 
 //Request (Petición)
 //Response (Respuesta)
-app.get('/test',  (req, res) => {
-    res.send('Ésta es una página de test 4');
+const bcrypt = require("bcrypt");
+
+app.get('/test', async(req, res) => {
+
+    const contrasena = "1234";
+    const contrasena_hash = await bcrypt.hash(contrasena, 10);
+
+    res.send(contrasena_hash);
+
+    //res.send('Ésta es una página de test 4');
 });
 
 app.get('/saludar/:nombre', (req, res) => {
@@ -29,6 +37,7 @@ app.get('/saludar/:nombre', (req, res) => {
 });
 
 app.use(require('./src/routes/eventoRoutes'));
+app.use(require('./src/routes/usuarioRoutes'));
 
 app.use((req, res, next) => {
     res.status(404);
