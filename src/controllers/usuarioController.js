@@ -53,5 +53,7 @@ exports.login = async(req, res) => {
 
 //Ruta protegida
 exports.welcome = (req, res) => {
+
     res.json({ success: true, message: 'Bienvenida/o ' + req.user.nombre });
+    
 }
