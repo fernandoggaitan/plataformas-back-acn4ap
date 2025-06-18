@@ -10,5 +10,6 @@ const { requireAuth } = require("../middlewares/auth");
 router.post('/register', usuarioController.register);
 router.post('/login', usuarioController.login);
 router.get('/welcome', requireAuth, usuarioController.welcome);
+router.get('/refresh-token', usuarioController.refreshToken);
 
 module.exports = router;
